@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Typography, Button, Form, Input } from 'antd';
 import Axios from 'axios';
+import { useSelector } from 'react-redux';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -9,20 +10,20 @@ const { TextArea } = Input;
 function UploadBoard(props) {
 
     const [Title, setTitle] = useState("")
-    const [Post, setPost] = useState("")
+    const [Text, setText] = useState("")
 
     const titleChangeHandler = (event) => {
         setTitle(event.currentTarget.value)
     }
 
-    const postChangeHandler = (event) => {
-        setPost(event.currentTarget.value)
+    const textChangeHandler = (event) => {
+        setText(event.currentTarget.value)
     }
 
     const submitHandler = (event) => {
         event.preventDefault();
 
-        if (!Title || !Post === 0) {
+        if (!Title || !Text === 0) {
             return alert(" 모든 값을 입력해주세요.")
         }
 
@@ -31,14 +32,14 @@ function UploadBoard(props) {
             //로그인 된 사람의 ID 
             writer: props.user.userData._id,
             title: Title,
-            post: Post,
+            text: Text,
         }
 
         Axios.post('/api/board', body)
             .then(response => {
                 if (response.data.success) {
                     alert('게시물 업로드에 성공 했습니다.')
-                    props.history.push('/board')
+                    props.history.push('/boardPage')
                 } else {
                     alert('게시물에 실패 했습니다.')
                 }
@@ -59,7 +60,7 @@ function UploadBoard(props) {
                 <br />
                 <br />
                 <label><b>내용</b></label>
-                <TextArea onChange={postChangeHandler} value={Post} style={{ height: '500px' }}/>
+                <TextArea onChange={textChangeHandler} value={Text} style={{ height: '500px' }}/>
                 <br />
                 <br />
                 <button type="submit" >

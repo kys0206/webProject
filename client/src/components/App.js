@@ -27,6 +27,8 @@ import Course from './views/Course/Course';
 import UploadCoursePage from './views/UploadCoursePage/UploadCoursePage';
 import DetailCoursePage from './views/DetailCoursePage/DetailCoursePage';
 
+import BoardPage from './views/BoardPage/BoardPage';
+import UploadBoardPage from './views/UploadBoardPage/UploadBoardPage';
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -58,6 +60,9 @@ function App() {
           <Route exact path="/course" component={Auth(Course, null)} />
           <Route exact path="/course/upload" component={Auth(UploadCoursePage, true)} />
           <Route exact path="/course/:courseId" component={Auth(DetailCoursePage, null)} />
+
+          <Route exact path="/boardPage" component={Auth(BoardPage, null)} />
+          <Route exact path="/board/upload" component={Auth(UploadBoardPage, true)} />
 
           <Route exact path="/user/cart" component={Auth(CartPage, true)} />
         </Switch>

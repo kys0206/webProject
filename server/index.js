@@ -40,7 +40,7 @@ app.use('/api/comment', require('./routes/comment'));
 app.use('/api/like', require('./routes/like'));
 app.use('/api/post', require('./routes/post'));
 app.use('/api/popular', require('./routes/popular'));
-//app.use('/api/board', require('./routes/board'));
+app.use('/api/board', require('./routes/board'));
 app.use('/api/course', require('./routes/course'));
 
 

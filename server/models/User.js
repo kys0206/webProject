@@ -26,6 +26,18 @@ const userSchema = mongoose.Schema({
         type:String,
         maxlength: 50
     },
+    birth_year: {
+        type: Number,
+        maxlength: 4
+    },
+    birth_month: {
+        type: Number,
+        default: 1
+    },
+    birth_day: {
+        type: Number,
+        maxlength: 2
+    },
     role: {
         type: Number,
         default: 0

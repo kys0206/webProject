@@ -5,8 +5,8 @@ const MenuItemGroup = Menu.ItemGroup;
 
 function LeftMenu(props) {
   return (
-    <div style={{ position: 'relative', left: '-15%', fontWeight: 'bold' }}>
-      <Menu mode={props.mode}style={{ position: 'relative', left: '-22%'}}>
+    <div style={{ position: 'relative', left: '-37%', fontWeight: 'bold' }}>
+      <Menu mode={props.mode}>
         <SubMenu title={<span>인기</span>} >
           <MenuItemGroup>
             <Menu.Item key="post">
@@ -23,8 +23,8 @@ function LeftMenu(props) {
       <Menu.Item key="map">
         <a href="/map">여행지 맵</a>
       </Menu.Item>
-      <Menu.Item key="board">
-        <a href="/">자유게시판</a>
+      <Menu.Item key="boardPage">
+        <a href="/boardPage">자유게시판</a>
       </Menu.Item>
     </Menu>
     </div>

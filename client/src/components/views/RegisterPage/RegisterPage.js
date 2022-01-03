@@ -44,6 +44,9 @@ function RegisterPage(props) {
         email: '',
         nickname: '',
         name: '',
+        birth_year: '',
+        birth_month: '',
+        birth_day: '',
         password: '',
         confirmPassword: ''
       }}
@@ -60,7 +63,15 @@ function RegisterPage(props) {
           .required('비밀번호가 입력되지 않았습니다'),
         confirmPassword: Yup.string()
           .oneOf([Yup.ref('password'), null], '비밀번호가 일치하지 않습니다')
-          .required('비밀번호를 한번 더 입력해주세요')
+          .required('비밀번호를 한번 더 입력해주세요'),
+        birth_year: Yup.string()
+          .max(4, '연도를 4자 입력해주세요')
+          .required('연도가 입력되지 않았습니다'),
+        birth_month: Yup.string()
+          .required('월이 선택되지 않았습니다'),
+        birth_day: Yup.string()
+          .max(2, 'Day를 입력해주세요')
+          .required('Day가 입력되지 않았습니다')
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -71,6 +82,9 @@ function RegisterPage(props) {
             password: values.password,
             name: values.name,
             nickname: values.nickname,
+            birth_year: values.birth_year,
+            birth_month: values.birth_month,
+            birth_day: values.birth_day,
             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
           };
 
@@ -103,7 +117,7 @@ function RegisterPage(props) {
             <h2>회원가입</h2>
             <br/>
             <Form style={{ minWidth: '375px' }} {...formItemLayout} onSubmit={handleSubmit} >
-            <Form.Item required label="ID" hasFeedback validateStatus={errors.userId && touched.userId ? "error" : 'success'}>
+            <Form.Item required label="아이디" hasFeedback validateStatus={errors.userId && touched.userId ? "error" : 'success'}>
                 <Input
                   id="userId"
                   placeholder="ID를 입력하세요"
@@ -169,6 +183,68 @@ function RegisterPage(props) {
                 {errors.name && touched.name && (
                   <div className="input-feedback">{errors.name}</div>
                 )}
+              </Form.Item>
+
+              <Form.Item required label="생년월일">
+                <Input
+                  id="birth_year"
+                  placeholder="년(4자)"
+                  type="text"
+                  value={values.birth_year}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  style={{ width: '75px',  }}
+                  className={
+                    errors.birth_year && touched.birth_year ? 'text-input error' : 'text-input'
+                  }
+                />
+                &nbsp;&nbsp;
+
+                <select
+                  id="birth_month"
+                  value={values.birth_month}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  style={{ width: '65px', height: '30px' }}
+                  className={
+                    errors.nickname && touched.nickname ? 'text-input error' : 'text-input'
+                  }
+                >
+                  <option value="0">월</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+                &nbsp;&nbsp;
+
+                <Input
+                  id="birth_day"
+                  placeholder="일"
+                  type="text"
+                  value={values.birth_day}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  style={{ width: '75px',  }}
+                  className={
+                    errors.birth_day && touched.birth_day ? 'text-input error' : 'text-input'
+                  }
+                />
+                {errors.nickname && touched.nickname && (
+                  <div className="input-feedback">{errors.nickname}</div>
+                )}
+              </Form.Item>
+
+              <Form.Item required label="만 나이">
+                
               </Form.Item>
 
               <Form.Item required label="닉네임">
